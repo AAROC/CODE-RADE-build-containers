@@ -1,25 +1,20 @@
 version: "1"
 services:
-  # Add your containers here, specifying the base image you want to build from
-  # For example:
-  #
-  # web:
-  #   image: ubuntu:trusty
-  #   ports:
-  #     - "80:80"
-  #   command: ['/usr/bin/dumb-init', '/usr/sbin/apache2ctl', '-D', 'FOREGROUND']
-  #   dev_overrides:
-  #     environment:
-  #       - "DEBUG=1"
-  #
   build-slave:
     image: ubuntu:trusty
+    user: jenkins
     ports:
       - "22:22"
-    command: ['/usr/sbin/sshd', '-f' , '/etc/ssh/sshd_config', '-D']
+    volumes:
+      - /home/becker/SAGrid-2.0/gmp-deploy:/home/jenkins/workdir
+    working_dir: /home/jenkins/workdir
+    command: ['/bin/bash', '-xe', 'build.sh']
 
-registries: {}
-  # Add optional registries used for deployment. For example:
-  #  google:
-  #    url: https://gcr.io
-  #    namespace: my-cool-project-xxxxxx
+
+registries:
+  docker:
+    url: https://hub.docker.com
+    namespace: /u/aaroc
+  quay:
+    url: https://quay.io
+    namespace: aaroc
