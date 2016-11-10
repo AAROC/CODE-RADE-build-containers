@@ -1,10 +1,10 @@
 version: "1"
 services:
   build-slave:
-    image: centos:7
+    image: {{ base_image}}:{{ base_image_tag}}
     ports:
-      - "22:22"
-    command: ["/usr/sbin/sshd", "-D","-p 422"] 
+      - "{{ host_port }}:{{ container_port }}"
+    command: ["/usr/sbin/sshd", "-D","-p {{ container_port}}"]
 
 registries:
   docker:

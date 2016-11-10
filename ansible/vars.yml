@@ -1,0 +1,6 @@
+# Vars for Buildslave
+---
+host_port: 22
+container_port: 22
+base_image: "centos"
+base_image_tag: 7
