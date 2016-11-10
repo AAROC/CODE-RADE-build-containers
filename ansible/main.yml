@@ -17,11 +17,14 @@
         name: jenkins
         home: /home/jenkins
         state: present
-    - name: add my key to the authorized keys
+    - name: add keys to the authorized keys
       authorized_key:
         user: jenkins
-        key: https://github.com/brucellino.keys
+        key: https://github.com/{{ item }}.keys
         validate_certs: False
+      with_items:
+        - brucellino
+        - jenkinssagrid
 
     - name: install sshd
       package:
