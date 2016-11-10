@@ -12,6 +12,12 @@
       raw: which python || yum update && yum install -y python
     - name: get some facts
       setup:
+
+    - name: ensure jdk is present
+      package:
+        name: java-1.8.0-openjdk.x86_64
+        state: present
+
     - name: add jenkins user
       user:
         name: jenkins
