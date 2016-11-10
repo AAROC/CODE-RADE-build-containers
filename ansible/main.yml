@@ -17,6 +17,7 @@
         name: jenkins
         home: /home/jenkins
         state: present
+        password: $6$9WIT0iLEtXn0y$R4iU5cWmEyFPoCZJMkyrrilXBZr4WxPgWqDBOwlRQ7rYovTIFvLHbuipOrXr6hTyASKl57YG6Pj0gwrUCR2/H.
     - name: add keys to the authorized keys
       authorized_key:
         user: jenkins
