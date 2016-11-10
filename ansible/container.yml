@@ -4,7 +4,7 @@ services:
     image: centos:7
     ports:
       - "22:22"
-    command: ["/usr/sbin/sshd", "-D","-p 22"] 
+    command: ["/usr/sbin/sshd", "-D","-p 422"] 
 
 registries:
   docker:
