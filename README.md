@@ -5,3 +5,11 @@
 # CODE-RADE build containers
 
 This repository contains the Ansible-Container code for building the CODE-RADE build slave containers
+
+The containers are built with [Ansible Container](http://docs.ansible.com/ansible-container) and stored on [quay.io](https://quay.io).
+
+## To build
+
+`ansible-container --var-file vars.yml build`
+
+The container adds a user, jdk and ssh daemon for jenkins. 
