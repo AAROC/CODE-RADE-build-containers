@@ -9,10 +9,42 @@
   gather_facts: false
   tasks:
     - name: install python
-      raw: which python || apt-get update && apt-get install -y python
+      raw: which python || yum update && yum install -y python
     - name: get some facts
       setup:
     - name: add jenkins user
       user:
         name: jenkins
+        home: /home/jenkins
+        state: present
+    - name: add my key to the authorized keys
+      authorized_key:
+        user: jenkins
+        key: https://github.com/brucellino.keys
+        validate_certs: False
+
+    - name: install sshd
+      package:
+        name: openssh-server
+        state: present
+    - name: generate host keys
+      command: "ssh-keygen -f /etc/ssh/ssh_host_{{item }}_key -N '' -t {{ item }}"
+      args:
+        creates: "/etc/ssh/ssh_host_{{item }}_key"
+      with_items:
+        - rsa
+        - dsa
+        - ecdsa
+
+    - name: ensure run dir present
+      file:
+        dest: /var/run/sshd
+        state: directory
+        owner: root
+
+    - name: Replace the pam login
+      lineinfile:
+        dest: /etc/pam.d/sshd
+        line: "session    optional     pam_loginuid.so"
+        regexp: "session    required     pam_loginuid.so"
         state: present

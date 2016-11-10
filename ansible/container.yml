@@ -1,15 +1,10 @@
 version: "1"
 services:
   build-slave:
-    image: ubuntu:trusty
-    user: jenkins
+    image: centos:7
     ports:
       - "22:22"
-    volumes:
-      - /home/becker/SAGrid-2.0/gmp-deploy:/home/jenkins/workdir
-    working_dir: /home/jenkins/workdir
-    command: ['/bin/bash', '-xe', 'build.sh']
-
+    command: ["/usr/sbin/sshd", "-D","-p 22"] 
 
 registries:
   docker:
