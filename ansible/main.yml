@@ -58,3 +58,9 @@
         line: "session    optional     pam_loginuid.so"
         regexp: "session    required     pam_loginuid.so"
         state: present
+
+    - name: install prerequisites
+      package:
+        name: "{{ items }}"
+        state: present
+        
