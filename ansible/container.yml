@@ -6,7 +6,9 @@ services:
       - "{{ host_port }}:{{ container_port }}"
     command: ["/usr/sbin/sshd", "-D","-p {{ container_port}}"]
     volumes:
-      - "/tmp:{{ src_dir }}"
+      - "{{ src_dir }}:{{ src_dir }}"
+      - "{{ repo_dir }}:{{ repo_dir }}"
+      - "{{ soft_dir }}:{{ soft_dir }}"
 registries:
   docker:
     url: https://hub.docker.com

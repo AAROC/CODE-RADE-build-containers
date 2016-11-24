@@ -1,0 +1,15 @@
+#%Module 1.0
+#
+#  CI modulefile for CODE-RADE FR3
+#
+#%Module1.0
+## CI modulefile
+##
+proc ModulesHelp { } {
+    puts stderr "       This module does nothing but alert the user"
+    puts stderr "       that the [module-info name] module is not available"
+}
+
+setenv REPO_DIR /data/artefacts
+setenv SRC_DIR /data/src
+setenv SOFT_DIR /data/ci-build

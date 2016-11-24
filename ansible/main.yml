@@ -5,14 +5,17 @@
 # For many examples of roles, check out Ansible Galaxy: https://galaxy.ansible.com/
 #
 ---
-- hosts: all
+- name: Raw Setup
+  hosts: all
   gather_facts: false
   tasks:
     - name: install python
       raw: which python || yum update && yum install -y python
     - name: get some facts
       setup:
-- hosts: all
+
+- name: Prepare Jenkins environment
+  hosts: all
   tasks:
     - name: ensure jdk is present
       package:
@@ -59,10 +62,19 @@
         line: "session    optional     pam_loginuid.so"
         regexp: "session    required     pam_loginuid.so"
         state: present
-    - name: install prerequisites
-      package:
-        name: "{{ item }}"
-        state: present
-      with_items:
-        - git
-        - environment-modules
+
+- name: CODE-RADE secret sauce
+  hosts: all
+  tasks:
+  - name: install prerequisites
+    package:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - git
+      - environment-modules
+  - name: Push the CI module
+    copy:
+      src: files/usr/share/Modules/modulefiles/ci
+      dest: /usr/share/Modules/modulefiles/ci
+      #validate: 'module add %s'
