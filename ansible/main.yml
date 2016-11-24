@@ -22,10 +22,10 @@
         name: java-1.8.0-openjdk.x86_64
         state: present
 
-    - name: Update root user
+    - name: Update jenkins user
       user:
-        name: root
-        #home: /home/jenkins
+        name: jenkins
+        home: /home/jenkins
         state: present
         password: $6$9WIT0iLEtXn0y$R4iU5cWmEyFPoCZJMkyrrilXBZr4WxPgWqDBOwlRQ7rYovTIFvLHbuipOrXr6hTyASKl57YG6Pj0gwrUCR2/H.
     - name: add keys to the authorized keys
