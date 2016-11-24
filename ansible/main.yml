@@ -63,4 +63,4 @@
       package:
         name: "{{ items }}"
         state: present
-        
+      with_items: "{{ prerequisites }}"
