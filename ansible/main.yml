@@ -78,3 +78,13 @@
       src: files/usr/share/Modules/modulefiles/ci
       dest: /usr/share/Modules/modulefiles/ci
       #validate: 'module add %s'
+  - name: Ensure that Jenkins owns the CI
+    file:
+      path: "{{ item }}"
+      owner: jenkins
+      group: jenkins
+      state: directory
+    with_items:
+      - /data/src
+      - /data/artefacts
+      - /data/ci-build
