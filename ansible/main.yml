@@ -12,7 +12,8 @@
       raw: which python || yum update && yum install -y python
     - name: get some facts
       setup:
-
+- hosts: all
+  tasks:
     - name: ensure jdk is present
       package:
         name: java-1.8.0-openjdk.x86_64
@@ -58,9 +59,9 @@
         line: "session    optional     pam_loginuid.so"
         regexp: "session    required     pam_loginuid.so"
         state: present
-
     - name: install prerequisites
       package:
-        name: "{{ items }}"
+        name: "{{ item }}"
         state: present
-      with_items: "{{ prerequisites }}"
+      with_items:
+        - git
