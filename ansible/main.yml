@@ -73,6 +73,7 @@
     with_items:
       - git
       - environment-modules
+      - wget
   - name: Push the CI module
     copy:
       src: files/usr/share/Modules/modulefiles/ci
@@ -85,6 +86,6 @@
       group: jenkins
       state: directory
     with_items:
-      - /data/src
-      - /data/artefacts
-      - /data/ci-build
+      - /data/src/
+      - /data/artefacts/
+      - /data/ci-build/
