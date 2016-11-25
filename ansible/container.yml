@@ -5,11 +5,15 @@ services:
     ports:
       - "{{ host_port }}:{{ container_port }}"
     command: ["/usr/sbin/sshd", "-D","-p {{ container_port}}"]
-    # volumes:
-    #   - "{{ src_dir }}:{{ src_dir }}"
-    #   - "{{ repo_dir }}:{{ repo_dir }}"
-    #   - "{{ soft_dir }}:{{ soft_dir }}"
-    # build-data:
+    volumes:
+      - "{{ src_dir }}"
+      - "{{ repo_dir }}"
+      - "{{ soft_dir }}"
+  build-data:
+    image: alpine
+    volumes:
+      - /tmp
+
 
 registries:
   docker:

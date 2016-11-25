@@ -6,7 +6,7 @@
 #
 ---
 - name: Raw Setup
-  hosts: all
+  hosts: build-slave
   gather_facts: false
   tasks:
     - name: install python
@@ -15,7 +15,7 @@
       setup:
 
 - name: Prepare Jenkins environment
-  hosts: all
+  hosts: build-slave
   tasks:
     - name: ensure jdk is present
       package:
@@ -64,7 +64,7 @@
         state: present
 
 - name: CODE-RADE secret sauce
-  hosts: all
+  hosts: build-slave
   tasks:
   - name: install prerequisites
     package:
