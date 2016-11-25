@@ -9,11 +9,6 @@ services:
       - "{{ src_dir }}"
       - "{{ repo_dir }}"
       - "{{ soft_dir }}"
-  build-data:
-    image: alpine
-    volumes:
-      - /tmp
-
 
 registries:
   docker:
