@@ -1,0 +1,10 @@
+# Vars for Buildslave
+---
+host_port: 5000
+container_port: 5200
+base_image: "centos"
+base_image_tag: 7
+tag: latest
+src_dir: /tmp/src/
+repo_dir: /tmp/artefacts
+soft_dir: /tmp/ci-build
