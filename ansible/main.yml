@@ -74,6 +74,19 @@
       - git
       - environment-modules
       - wget
+      - bzip2
+  - name: Install Vanilla compiler (RedHat)
+    yum:
+      name: '@Development tools'
+      state: present
+    when: ansible_os_family == 'RedHat'
+
+  - name: Install Vanilla compiler (Debian)
+    apt:
+      name: build-essential
+      state: present
+    when: "{{ ansible_os_family == 'Debian'}}"
+
   - name: Push the CI module
     copy:
       src: files/usr/share/Modules/modulefiles/ci

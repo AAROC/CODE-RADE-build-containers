@@ -1,15 +1,21 @@
 #%Module 1.0
 #
-#  CI modulefile for CODE-RADE FR3
+#  CI module for use with 'environment-modules' package:
 #
-#%Module1.0
-## CI modulefile
-##
-proc ModulesHelp { } {
-    puts stderr "       This module does nothing but alert the user"
-    puts stderr "       that the [module-info name] module is not available"
-}
+setenv        SOFT_DIR               /data/ci-build/$::env(SITE)/$::env(OS)/$::env(ARCH)/$::env(NAME)/$::env(VERSION)
+setenv        REPO_DIR               /repo/artefacts/$::env(SITE)/$::env(OS)/$::env(ARCH)/$::env(NAME)/$::env(VERSION)
+setenv        SRC_DIR                /data/src/$::env(NAME)/$::env(VERSION)
 
-setenv REPO_DIR /data/artefacts
-setenv SRC_DIR /data/src
-setenv SOFT_DIR /data/ci-build
+set           MODULES                /repo/modules
+setenv        COMPILERS_MODULES      $MODULES/compilers
+setenv        PHYSICAL_MODULES       $MODULES/physical-sciences
+setenv        BIOINFORMATICS_MODULES $MODULES/bioinformatics
+setenv        LANGUAGES_MODULES      $MODULES/languages
+setenv        LIBRARIES_MODULES      $MODULES/libraries
+
+prepend-path  MODULEPATH             $MODULES
+prepend-path  MODULEPATH             $::env(COMPILERS_MODULES)
+prepend-path  MODULEPATH             $::env(PHYSICAL_MODULES)
+prepend-path  MODULEPATH             $::env(BIOINFORMATICS_MODULES)
+prepend-path  MODULEPATH             $::env(LANGUAGES_MODULES)
+prepend-path  MODULEPATH             $::env(LIBRARIES_MODULES)
