@@ -1,0 +1,36 @@
+
+- kube_service:
+    service_name: build-slave
+    ports:
+    - name: port-5000
+      port: 5000
+      targetPort: 5200
+    selector:
+      app: code-rade-build-containers
+      service: build-slave
+    type: LoadBalancer
+  register: output
+
+- debug: var=output
+  when: playbook_debug
+
+- kube_deployment:
+    labels:
+      app: code-rade-build-containers
+      service: build-slave
+    deployment_name: build-slave
+    containers:
+    - securityContext: {}
+      name: build-slave
+      image: brucellino/code-rade-build-containers-build-slave:20161124160013
+      args:
+      - /usr/sbin/sshd
+      - -D
+      - -p 5200
+      ports:
+      - 5200
+    replace: true
+  register: output
+
+- debug: var=output
+  when: playbook_debug

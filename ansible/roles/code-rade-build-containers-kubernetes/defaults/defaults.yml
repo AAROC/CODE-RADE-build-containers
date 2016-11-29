@@ -1,0 +1,4 @@
+---
+# defaults for code-rade-build-containers-kubernetes
+
+playbook_debug: no
