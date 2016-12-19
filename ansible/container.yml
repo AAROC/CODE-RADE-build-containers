@@ -11,10 +11,10 @@ services:
     image: alpine
     command: ["/bin/sh","-c","while true; do sleep 1000; done"]
     volumes:
-      - /data
-      # - "{{ src_dir }}"
-      # - "{{ repo_dir }}"
-      # - "{{ soft_dir }}"
+      # - /data
+      - "{{ src_dir }}"
+      - "{{ repo_dir }}"
+      - "{{ soft_dir }}"
 
 registries:
   docker:
