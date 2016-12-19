@@ -19,7 +19,14 @@ The container adds a user, jdk and ssh daemon for jenkins, as well as some CODE-
       `set           MODULES                /data/modules`
   * A data container (`CODE-RADE-data`) is used to persist the data from build to build, and to make the builds portable.
 
+## The Data Container
 
+We use the [data container pattern](https://docs.docker.com/engine/tutorials/dockervolumes/#/data-volumes) to provide persistence to the build artefacts, across jobs. This can be created by hand or pulled from Quay :
+
+  1. `docker create -v /data  --name CODE-RADE-data alpine /bin/true`
+  1. `docker pull quay.io/aaroc/code-rade-data`
+
+Note that if you do this, the container will be empty (we  still  need to add a pots-process of pushing the updated container to Quay)
 
 ## To build
 
