@@ -5,6 +5,6 @@ container_port: 5200
 base_image: "ubuntu"
 base_image_tag: 14.04
 tag: latest
-src_dir: /tmp/src/
-repo_dir: /tmp/artefacts
-soft_dir: /tmp/ci-build
+src_dir: /data/src/
+repo_dir: /data/artefacts
+soft_dir: /data/ci-build
