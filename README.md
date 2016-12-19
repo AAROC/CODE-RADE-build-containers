@@ -42,3 +42,18 @@ ansible-container --var-file vars.yml push --push-to quay
 ```
 
 Obviously, vary the vars file accordingly.
+
+## Tagging images with OS name
+
+Ansible-Container does not yet allow for you to tag images with your specified tags (See [this request](https://github.com/ansible/ansible-container/issues/125)), so if you want to build with name-tagged images (instead of time-tagged images), you need to use the docker CLI to add the tags you want:
+
+  1. Build with a specified set of vars : `ansible-container --var-file vars-ubuntu1404.yml build`
+  1. Check the name of the created image, from the SHA reported by ansible-container :
+
+          Committing image...
+          Exported code-rade-build-containers-build-slave with image ID sha256:fd0ce1c13f8c583f8f90d265d662b8da40eabf731be3c046242df6970c2ef5fe
+          docker images | grep fd0ce1c13f8c
+          code-rade-build-containers-build-slave                 20161219105249      fd0ce1c13f8c About a minute ago   1.179 GB
+          code-rade-build-containers-build-slave                 latest                           fd0ce1c13f8c About a minute ago   1.179 GB
+
+  1. The tag you want is the date tag : `20161219105249` (or `latest`, if you haven't done another build). Tag this with an OS-name : `docker tag code-rade-build-containers-build-slave:20161219105249 quay.io/aaroc/code-rade-build-containers-build-slave:ubuntu1404`
