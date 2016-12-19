@@ -10,7 +10,7 @@
   gather_facts: false
   tasks:
     - name: install python
-      raw: which python || yum update && yum install -y python
+      raw: which python || yum -y update && yum install -y python
     - name: get some facts
       setup:
 
@@ -75,6 +75,8 @@
       - environment-modules
       - wget
       - bzip2
+      - vim
+      - which
   - name: Install Vanilla compiler (RedHat)
     yum:
       name: '@Development tools'
@@ -92,13 +94,13 @@
       src: files/usr/share/Modules/modulefiles/ci
       dest: /usr/share/Modules/modulefiles/ci
       #validate: 'module add %s'
-  - name: Ensure that Jenkins owns the CI
-    file:
-      path: "{{ item }}"
-      owner: jenkins
-      group: jenkins
-      state: directory
-    with_items:
-      - /data/src/
-      - /data/artefacts/
-      - /data/ci-build/
+  # - name: Ensure that Jenkins owns the CI
+  #   file:
+  #     path: "{{ item }}"
+  #     owner: jenkins
+  #     group: jenkins
+  #     state: directory
+  #   with_items:
+  #     - /data/src/
+  #     - /data/artefacts/
+  #     - /data/ci-build/
