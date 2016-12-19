@@ -4,6 +4,7 @@ host_port: 5000
 container_port: 5200
 base_image: "centos"
 base_image_tag: 6
+modules_dir: /data/modules
 src_dir: /data/src/
 repo_dir: /data/artefacts
 soft_dir: /data/ci-build
