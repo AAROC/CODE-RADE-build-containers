@@ -1,14 +1,19 @@
 version: "1"
 services:
   build-slave:
-    image: {{ base_image}}:{{ base_image_tag}}
+    image: "{{ base_image}}:{{ base_image_tag}}"
     ports:
       - "{{ host_port }}:{{ container_port }}"
     command: ["/usr/sbin/sshd", "-D","-p {{ container_port}}"]
-    volumes:
-      - "{{ src_dir }}"
-      - "{{ repo_dir }}"
-      - "{{ soft_dir }}"
+    # volumes:
+    #   - "{{ src_dir }}"
+    #   - "{{ repo_dir }}"
+    #   - "{{ soft_dir }}"
+    volumes_from:
+      - data-container:rw
+  data-container:
+    image: alpine
+    command: ["/bin/sh","-c","while true; do sleep 1000; done"]
 
 registries:
   docker:
