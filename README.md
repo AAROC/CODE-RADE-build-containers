@@ -1,6 +1,4 @@
-[![Docker Repository on Quay](https://quay.io/repository/aaroc/code-rade-build-containers-build-slave/status "Docker Repository on Quay")](https://quay.io/repository/aaroc/code-rade-build-containers-build-slave) [![Build Status](https://ci.sagrid.ac.za/job/build-container/badge/icon)](https://ci.sagrid.ac.za/job/build-container)  [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-
-
+[![Build Container Repository on Quay](https://quay.io/repository/aaroc/code-rade-build-containers-build-slave/status "Docker Repository on Quay")](https://quay.io/repository/aaroc/code-rade-build-containers-build-slave) [![Data Container Repository on Quay](https://quay.io/repository/aaroc/code-rade-data/status "Docker Repository on Quay")](https://quay.io/repository/aaroc/code-rade-data) [![Build Status](https://ci.sagrid.ac.za/job/build-container/badge/icon)](https://ci.sagrid.ac.za/job/build-container)  [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 # CODE-RADE build containers
 
@@ -57,3 +55,4 @@ Ansible-Container does not yet allow for you to tag images with your specified t
           code-rade-build-containers-build-slave                 latest                           fd0ce1c13f8c About a minute ago   1.179 GB
 
   1. The tag you want is the date tag : `20161219105249` (or `latest`, if you haven't done another build). Tag this with an OS-name : `docker tag code-rade-build-containers-build-slave:20161219105249 quay.io/aaroc/code-rade-build-containers-build-slave:ubuntu1404`
+  1. Push the image to quay : `docker push quay.io/aaroc/code-rade-build-containers-build-slave:ubuntu1404`
