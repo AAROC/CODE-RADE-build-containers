@@ -7,13 +7,14 @@ services:
     command: ["/usr/sbin/sshd", "-D","-p {{ container_port}}"]
     volumes_from:
       - data-container:rw
-  data-container:
+  CODE-RADE-data:
     image: alpine
     command: ["/bin/sh","-c","while true; do sleep 1000; done"]
     volumes:
-      - "{{ src_dir }}"
-      - "{{ repo_dir }}"
-      - "{{ soft_dir }}"
+      - /data
+      # - "{{ src_dir }}"
+      # - "{{ repo_dir }}"
+      # - "{{ soft_dir }}"
 
 registries:
   docker:
