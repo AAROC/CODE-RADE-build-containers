@@ -6,7 +6,7 @@ services:
       - "{{ host_port }}:{{ container_port }}"
     command: ["/usr/sbin/sshd", "-D","-p {{ container_port}}"]
     volumes_from:
-      - data-container:rw
+      - CODE-RADE-data:rw
   CODE-RADE-data:
     image: alpine
     command: ["/bin/sh","-c","while true; do sleep 1000; done"]
