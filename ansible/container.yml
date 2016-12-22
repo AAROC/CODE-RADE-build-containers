@@ -7,6 +7,7 @@ services:
     command: ["/usr/sbin/sshd", "-D","-p {{ container_port}}"]
     volumes_from:
       - CODE-RADE-src:rw
+      - CODE-RADE-modules:rw
       - CODE-RADE-soft:rw
       - CODE-RADE-repo:rw
   CODE-RADE-src:
@@ -24,6 +25,12 @@ services:
     command: ["/bin/sh","-c","while true; do sleep 1000; done"]
     volumes:
       - "{{ repo_dir }}"
+  CODE-RADE-modules:
+    image: alpine
+    command: ["/bin/sh","-c","while true; do sleep 1000; done"]
+    volumes:
+      - "{{ modules_dir }}"
+
 
 registries:
   docker:
