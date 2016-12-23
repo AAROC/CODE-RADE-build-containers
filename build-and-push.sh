@@ -9,9 +9,7 @@ for base in centos6 centos7 ubuntu1404 ubuntu1610  ; do
   echo "Building container for ${base}"
   ansible-container --var-file vars-${base}.yml build
   echo "running container for ${base}"
-  ansible-container --var-file vars-${base}.yml run -d
   docker tag code-rade-build-containers-build-slave:latest quay.io/aaroc/code-rade-build-containers-build-slave:${base}
+  ansible-container --var-file vars-${base}.yml run -d
   docker push quay.io/aaroc/code-rade-build-containers-build-slave:${base}
 done
-echo "pushing data container"
-docker push quay.io
