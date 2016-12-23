@@ -90,7 +90,10 @@
       state: present
     when: "{{ ansible_os_family == 'Debian'}}"
 
-  - name: Push the CI module
+  - name: Push the modules
     copy:
-      src: files/usr/share/Modules/modulefiles/ci
-      dest: /usr/share/Modules/modulefiles/ci
+      src: files/usr/share/Modules/modulefiles/"{{ item }}"
+      dest: /usr/share/Modules/modulefiles/"{{ item }}"
+    with_items:
+      - ci
+      - deploy
