@@ -8,3 +8,4 @@ modules_dir: /data/modules
 src_dir: /data/src/
 repo_dir: /data/artefacts
 soft_dir: /data/ci-build
+cvmfs_dir: /cvmfs

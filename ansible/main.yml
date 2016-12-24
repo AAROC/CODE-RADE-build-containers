@@ -92,8 +92,8 @@
 
   - name: Push the modules
     copy:
-      src: files/usr/share/Modules/modulefiles/"{{ item }}"
-      dest: /usr/share/Modules/modulefiles/"{{ item }}"
+      src: "files/usr/share/Modules/modulefiles/{{ item }}"
+      dest: "/usr/share/Modules/modulefiles/{{ item }}"
     with_items:
       - ci
       - deploy

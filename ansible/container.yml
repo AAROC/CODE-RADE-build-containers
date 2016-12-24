@@ -30,6 +30,11 @@ services:
     command: ["/bin/sh","-c","while true; do sleep 1000; done"]
     volumes:
       - "{{ modules_dir }}"
+  CODE-RADE-cvmfs:
+    image: alpine
+    command: ["/bin/sh","-c","while true; do sleep 1000; done"]
+    volumes:
+      - "{{ cvmfs_dir }}"
 
 
 registries:
