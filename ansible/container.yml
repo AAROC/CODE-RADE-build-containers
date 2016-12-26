@@ -1,15 +1,18 @@
 version: "1"
 services:
-  build-slave:
-    image: "{{ base_image}}:{{ base_image_tag}}"
+{% for slave in slaves %}
+  build-slave-{{ slave.name }}:
+    image: "{{ slave.base_image}}:{{ slave.base_image_tag }}"
     ports:
-      - "{{ host_port }}:{{ container_port }}"
-    command: ["/usr/sbin/sshd", "-D","-p {{ container_port}}"]
+        - "{{ slave.host_port }}:{{ container_port }}"
+    #command: ["/usr/sbin/sshd", "-D","-p {{ container_port}}"]
+    command: ["/bin/sh","-c","while true; do sleep 1000; done"]
     volumes_from:
       - CODE-RADE-src:rw
       - CODE-RADE-modules:rw
       - CODE-RADE-soft:rw
       - CODE-RADE-repo:rw
+{% endfor %}
   CODE-RADE-src:
     image: alpine
     command: ["/bin/sh","-c","while true; do sleep 1000; done"]
