@@ -41,18 +41,6 @@
 - name: Prepare Jenkins environment
   hosts: ubuntu-slaves:centos-slaves
   tasks:
-    - name: ensure jdk is present (CentOS)
-      package:
-        name: java-1.8.0-openjdk.x86_64
-        state: present
-      when: ansible_os_family == 'RedHat'
-    - name: ensure jdk is present (Ubuntu)
-      package:
-        name: openjdk-8-jdk
-        state: present
-      when: ansible_os_family != 'Debian'
-
-
     - name: Update jenkins user
       user:
         name: jenkins
@@ -109,22 +97,44 @@
       - vim
       - which
       - tree
+      - java-1.8.0-openjdk.x86_64
+    when: ansible_os_family == "RedHat"
+
   - name: Install Vanilla compiler (RedHat)
     yum:
       name: '@Development tools'
       state: present
     when: ansible_os_family == 'RedHat'
 
-  - name: Install Vanilla compiler (Debian)
-    apt:
-      name: build-essential
+  - name: Install prerequisites (Debian)
+    package:
+      name: "{{ item }}"
       state: present
+    with_items:
+      - build-essential
+      - git
+      - environment-modules
+      - wget
+      - bzip2
+      - vim
+      - default-jdk
+      - tree
     when: "{{ ansible_os_family == 'Debian'}}"
 
-  - name: Push the modules
+  - name: Push the modules (RedHat)
     copy:
       src: "files/usr/share/Modules/modulefiles/{{ item }}"
       dest: "/usr/share/Modules/modulefiles/{{ item }}"
     with_items:
       - ci
       - deploy
+    when: ansible_os_family == "RedHat"
+
+  - name: Push the modules (Debian)
+    copy:
+      src: "files/usr/share/Modules/modulefiles/{{ item }}"
+      dest: "/usr/share/modules/modulefiles/{{ item }}"
+    with_items:
+      - ci
+      - deploy
+    when: ansible_os_family == "Debian"
