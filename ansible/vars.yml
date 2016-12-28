@@ -18,7 +18,7 @@ slaves:
     base_image_tag: "16.10"
     host_port: 5003
 
-container_port: 5200
+container_port: "5200"
 modules_dir: /data/modules
 src_dir: /data/src/
 repo_dir: /data/artefacts

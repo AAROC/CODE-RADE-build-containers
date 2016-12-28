@@ -5,41 +5,39 @@
 # For many examples of roles, check out Ansible Galaxy: https://galaxy.ansible.com/
 #
 ---
-- name: Group the build cluster
-  hosts: localhost
-  connection: local
-  tasks:
-    - name: Add ubuntu build slaves to group
-      add_host:
-        name: "build-slave-{{ item }}"
-        groups: ubuntu-slaves
-      with_items:
-        - ubuntu1404
-        - ubuntu1610
-    - name: Add CentOS slaves to group
-      add_host:
-        name: "build-slave-{{ item }}"
-        groups: centos-slaves
-      with_items:
-        - centos6
-        - centos7
+# - name: Group the build cluster
+#   tasks:
+#     - name: Add ubuntu build slaves to group
+#       add_host:
+#         name: "build-slave-{{ item }}"
+#         groups: ubuntu-slaves
+#       with_items:
+#         - ubuntu1404
+#         - ubuntu1610
+#     - name: Add CentOS slaves to group
+#       add_host:
+#         name: "build-slave-{{ item }}"
+#         groups: centos-slaves
+#       with_items:
+#         - centos6
+#         - centos7
 
 - name: Raw Setup (ubuntu)
-  hosts: ubuntu-slaves
+  hosts: build-slave-ubuntu*
   gather_facts: false
   tasks:
   - name: Install Python (Ubuntu)
     raw: which python || apt-get -y update && apt-get install -y python
 
 - name: Raw Setup (CentOS)
-  hosts: centos-slaves
+  hosts: build-slave-centos*
   gather_facts: false
   tasks:
     - name: install python
       raw: which python || yum -y update && yum install -y python
 
 - name: Prepare Jenkins environment
-  hosts: ubuntu-slaves:centos-slaves
+  hosts: build-slave*
   tasks:
     - name: Update jenkins user
       user:
@@ -83,7 +81,7 @@
         state: present
 
 - name: CODE-RADE secret sauce
-  hosts: ubuntu-slaves:centos-slaves
+  hosts: build-slave*
   tasks:
   - name: install prerequisites
     package:
