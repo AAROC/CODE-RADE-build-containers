@@ -117,6 +117,8 @@
       - vim
       - default-jdk
       - tree
+      - curl
+      - m4
     when: "{{ ansible_os_family == 'Debian'}}"
 
   - name: Push the modules (RedHat)
