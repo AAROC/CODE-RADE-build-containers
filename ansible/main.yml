@@ -96,13 +96,18 @@
       - which
       - tree
       - java-1.8.0-openjdk.x86_64
+      - perl-CPAN
+      - perl-App-cpanminus
     when: ansible_os_family == "RedHat"
 
-  - name: Install Vanilla compiler (RedHat)
+  - name: Install Required Groups (RedHat)
     yum:
-      name: '@Development tools'
+      name: "{{ item }}"
       state: present
     when: ansible_os_family == 'RedHat'
+    with_items:
+      - '@X Software Development'
+      - '@Development tool'
 
   - name: Install prerequisites (Debian)
     package:
@@ -119,7 +124,14 @@
       - tree
       - curl
       - m4
+      - cpanminus
+      - libx11-dev
     when: "{{ ansible_os_family == 'Debian'}}"
+
+  - name: Ensure Testing packages are installed
+    cpanm:
+      name: Test::More
+
 
   - name: Push the modules (RedHat)
     copy:
