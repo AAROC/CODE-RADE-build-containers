@@ -115,6 +115,7 @@
       state: present
     with_items:
       - build-essential
+      - gfortran
       - git
       - environment-modules
       - wget
