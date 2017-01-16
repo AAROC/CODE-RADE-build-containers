@@ -7,11 +7,12 @@ setenv        REPO_DIR               /data/artefacts/$::env(SITE)/$::env(OS)/$::
 setenv        SRC_DIR                /data/src/$::env(NAME)/$::env(VERSION)
 
 set           MODULES                /data/modules
-setenv        COMPILERS_MODULES      $MODULES/compilers
-setenv        PHYSICAL_MODULES       $MODULES/physical-sciences
-setenv        BIOINFORMATICS_MODULES $MODULES/bioinformatics
-setenv        LANGUAGES_MODULES      $MODULES/languages
-setenv        LIBRARIES_MODULES      $MODULES/libraries
+setenv        ASTRO_MODULES                      $MODULES/astronomy
+setenv        BIOINFORMATICS_MODULES  $MODULES/bioinformatics
+setenv        COMPILERS_MODULES            $MODULES/compilers
+setenv        LANGUAGES_MODULES           $MODULES/languages
+setenv        LIBRARIES_MODULES               $MODULES/libraries
+setenv        PHYSICAL_MODULES               $MODULES/physical-sciences
 
 prepend-path  MODULEPATH             $MODULES
 prepend-path  MODULEPATH             $::env(COMPILERS_MODULES)
