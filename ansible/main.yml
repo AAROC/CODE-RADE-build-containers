@@ -98,6 +98,7 @@
       - java-1.8.0-openjdk.x86_64
       - perl-CPAN
       - perl-App-cpanminus
+      - libX11-devel
     when: ansible_os_family == "RedHat"
 
   - name: Install Required Groups (RedHat)
