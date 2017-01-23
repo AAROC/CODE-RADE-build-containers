@@ -128,6 +128,7 @@
       - m4
       - cpanminus
       - libx11-dev
+      - zip
     when: "{{ ansible_os_family == 'Debian'}}"
 
   - name: Ensure Testing packages are installed
