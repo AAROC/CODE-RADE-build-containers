@@ -2,7 +2,7 @@
 #
 #  CI module for use with 'environment-modules' package:
 #
-setenv        CVMFS_DIR   /cvmfs/fastrepo.sagrid.ac.za
+setenv        CVMFS_DIR   /cvmfs/code-rade.africa-grid.org
 setenv 	      DEPLOY_DIR  $::env(CVMFS_DIR)/$::env(SITE)/$::env(OS)/$::env(ARCH)/$::env(NAME)/$::env(VERSION)
 setenv        REPO_DIR      $::env(CVMFS_DIR)/$::env(SITE)/$::env(OS)/$::env(ARCH)/$::env(NAME)/$::env(VERSION)
 setenv        SRC_DIR        /data/src/$::env(NAME)/$::env(VERSION)
