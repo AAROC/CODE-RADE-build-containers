@@ -17,8 +17,9 @@ setenv        HEP_MODULES                          $MODULES/hep
 
 prepend-path  MODULEPATH             $MODULES
 prepend-path  MODULEPATH             $::env(COMPILERS_MODULES)
+prepend-path  MODULEPATH             $::env(LIBRARIES_MODULES)
 prepend-path  MODULEPATH             $::env(PHYSICAL_MODULES)
 prepend-path  MODULEPATH             $::env(BIOINFORMATICS_MODULES)
 prepend-path  MODULEPATH             $::env(LANGUAGES_MODULES)
-prepend-path  MODULEPATH             $::env(LIBRARIES_MODULES)
 prepend-path  MODULEPATH             $::env(HEP_MODULES)
+prepend-path  MODULEPATH             $::env(ASTRO_MODULES)
