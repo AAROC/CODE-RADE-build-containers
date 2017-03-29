@@ -88,6 +88,7 @@
       name: "{{ item }}"
       state: present
     with_items:
+      - make
       - git
       - environment-modules
       - wget
@@ -97,8 +98,25 @@
       - tree
       - java-1.8.0-openjdk.x86_64
       - perl-CPAN
-      - perl-App-cpanminus
       - libX11-devel
+    when: ansible_os_family == "RedHat"
+  # See, now this just makes me upset. I have to put in this dirty workaround because
+  # there is a circular dependency on a frikkin perl module
+  # (need cpanm for Test::more, which needs cpanm to install)
+  - block:
+      - name: Ensure that cpanm is available
+        uri:
+          url: https://cpanmin.us/
+          dest: /bin/cpanm
+          creates: /bin/cpanm
+      - name: Ensure executable
+        file:
+          path: /bin/cpanm
+          mode: "u+rwx"
+    rescue:
+      - debug:
+          msg: "Ah, fuckit"
+
     when: ansible_os_family == "RedHat"
 
   - name: Install Required Groups (RedHat)
