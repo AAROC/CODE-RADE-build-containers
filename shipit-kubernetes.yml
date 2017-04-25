@@ -1,8 +1,0 @@
-- name: Deploy code-rade-build-containers to  kubernetes
-  hosts: localhost
-  gather_facts: false
-  connection: local
-  vars:
-    playbook_debug: false
-  roles:
-  - role: code-rade-build-containers-kubernetes
