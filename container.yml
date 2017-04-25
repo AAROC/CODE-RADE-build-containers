@@ -8,13 +8,13 @@ services:
       - CODE-RADE-container
     ports:
         - "5000:5200"
-    command: ["/usr/sbian/sshd", "-D","-p","5200"]
+    command: ["/usr/sbin/sshd", "-D","-p","5200"]
     volumes_from:
-      - CODE-RADE-src:rw
-      - CODE-RADE-modules:rw
-      - CODE-RADE-soft:rw
-      - CODE-RADE-repo:rw
-      - CODE-RADE-cvmfs:rw
+      - code-rade-src:rw
+      - code-rade-modules:rw
+      - code-rade-soft:rw
+      - code-rade-repo:rw
+      - code-rade-cvmfs:rw
   build-slave-centos7:
     from: "centos:7"
     roles:
@@ -23,11 +23,11 @@ services:
         - "5001:5200"
     command: ["/usr/sbin/sshd", "-D","-p","5200"]
     volumes_from:
-      - CODE-RADE-src:rw
-      - CODE-RADE-modules:rw
-      - CODE-RADE-soft:rw
-      - CODE-RADE-repo:rw
-      - CODE-RADE-cvmfs:rw
+      - code-rade-src:rw
+      - code-rade-modules:rw
+      - code-rade-soft:rw
+      - code-rade-repo:rw
+      - code-rade-cvmfs:rw
   build-slave-ubuntu1404:
     from: "ubuntu:14.04"
     roles:
@@ -36,11 +36,11 @@ services:
         - "5002:5200"
     command: ["/usr/sbin/sshd", "-D","-p","5200"]
     volumes_from:
-      - CODE-RADE-src:rw
-      - CODE-RADE-modules:rw
-      - CODE-RADE-soft:rw
-      - CODE-RADE-repo:rw
-      - CODE-RADE-cvmfs:rw
+      - code-rade-src:rw
+      - code-rade-modules:rw
+      - code-rade-soft:rw
+      - code-rade-repo:rw
+      - code-rade-cvmfs:rw
   build-slave-ubuntu1610:
     from: "ubuntu:16.10"
     roles:
@@ -49,38 +49,37 @@ services:
         - "5003:5200"
     command: ["/usr/sbin/sshd", "-D","-p","5200"]
     volumes_from:
-      - CODE-RADE-src:rw
-      - CODE-RADE-modules:rw
-      - CODE-RADE-soft:rw
-      - CODE-RADE-repo:rw
-      - CODE-RADE-cvmfs:rw
+      - code-rade-src:rw
+      - code-rade-modules:rw
+      - code-rade-soft:rw
+      - code-rade-repo:rw
+      - code-rade-cvmfs:rw
 
-  CODE-RADE-src:
+  code-rade-src:
     from: alpine
-    command: ["/bin/sh","-c",“while true; do sleep 1000; done"]
+    command: ["/bin/sh","-c","while true; do sleep 1000; done"]
     volumes:
       - /data/src
-  CODE-RADE-soft:
+  code-rade-soft:
     from: alpine
-    command: ["/bin/sh","-c",“while true; do sleep 1000; done"]
+    command: ["/bin/sh","-c","while true; do sleep 1000; done"]
     volumes:
       - /data/ci-build
-  CODE-RADE-repo:
+  code-rade-repo:
     from: alpine
-    command: ["/bin/sh","-c",“while true; do sleep 1000; done"]
+    command: ["/bin/sh","-c","while true; do sleep 1000; done"]
     volumes:
       - /data/artefacts
-  CODE-RADE-modules:
+  code-rade-modules:
     from: alpine
-    command: ["/bin/sh","-c",“while true; do sleep 1000; done"]
+    command: ["/bin/sh","-c","while true; do sleep 1000; done"]
     volumes:
       - /data/modules
-  CODE-RADE-cvmfs:
+  code-rade-cvmfs:
     from: alpine
-    command: ["/bin/sh","-c",“while true; do sleep 1000; done"]
+    command: ["/bin/sh","-c","while true; do sleep 1000; done"]
     volumes:
       - /cvmfs
-
 
 registries:
   docker:
@@ -89,23 +88,3 @@ registries:
   quay:
     url: https://quay.io
     namespace: aaroc
-
-  # Add your containers here, specifying the base image you want to build from
-  # For example:
-  #
-  # web:
-  #   from: centos:7
-  #   roles:
-  #     - apache-container
-  #   ports:
-  #     - "80:80"
-  #   command: ['/usr/bin/dumb-init', '/usr/sbin/apache2ctl', '-D', 'FOREGROUND']
-  #   dev_overrides:
-  #     environment:
-  #       - "DEBUG=1"
-  #
-registries: {}
-  # Add optional registries used for deployment. For example:
-  #  google:
-  #    url: https://gcr.io
-  #    namespace: my-cool-project-xxxxxx
