@@ -1,0 +1,183 @@
+# This should be your Ansible playbooks to provision your containers.
+# An inventory will be automatically created using the names of the services
+# from your container.yml file.
+# Add any roles or other modules you'll need to this directory too.
+# For many examples of roles, check out Ansible Galaxy: https://galaxy.ansible.com/
+#
+---
+# - name: Group the build cluster
+#   tasks:
+#     - name: Add ubuntu build slaves to group
+#       add_host:
+#         name: "build-slave-{{ item }}"
+#         groups: ubuntu-slaves
+#       with_items:
+#         - ubuntu1404
+#         - ubuntu1610
+#     - name: Add CentOS slaves to group
+#       add_host:
+#         name: "build-slave-{{ item }}"
+#         groups: centos-slaves
+#       with_items:
+#         - centos6
+#         - centos7
+
+- name: Raw Setup (ubuntu)
+  hosts: build-slave-ubuntu*
+  gather_facts: false
+  tasks:
+  - name: Install Python (Ubuntu)
+    raw: which python || apt-get -y update && apt-get install -y python
+
+- name: Raw Setup (CentOS)
+  hosts: build-slave-centos*
+  gather_facts: false
+  tasks:
+    - name: install python
+      raw: which python || yum -y update && yum install -y python
+
+- name: Prepare Jenkins environment
+  hosts: build-slave*
+  tasks:
+    - name: Update jenkins user
+      user:
+        name: jenkins
+        home: /home/jenkins
+        state: present
+        password: $6$9WIT0iLEtXn0y$R4iU5cWmEyFPoCZJMkyrrilXBZr4WxPgWqDBOwlRQ7rYovTIFvLHbuipOrXr6hTyASKl57YG6Pj0gwrUCR2/H.
+    - name: add keys to the authorized keys
+      authorized_key:
+        user: root
+        key: https://github.com/{{ item }}.keys
+        validate_certs: False
+      with_items:
+        - brucellino
+        - jenkinssagrid
+
+    - name: install sshd
+      package:
+        name: openssh-server
+        state: present
+    - name: generate host keys
+      command: "ssh-keygen -f /etc/ssh/ssh_host_{{item }}_key -N '' -t {{ item }}"
+      args:
+        creates: "/etc/ssh/ssh_host_{{item }}_key"
+      with_items:
+        - rsa
+        - dsa
+        - ecdsa
+
+    - name: ensure run dir present
+      file:
+        dest: /var/run/sshd
+        state: directory
+        owner: root
+
+    - name: Replace the pam login
+      lineinfile:
+        dest: /etc/pam.d/sshd
+        line: "session    optional     pam_loginuid.so"
+        regexp: "session    required     pam_loginuid.so"
+        state: present
+
+- name: CODE-RADE secret sauce
+  hosts: build-slave*
+  tasks:
+  - name: install prerequisites
+    package:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - make
+      - git
+      - environment-modules
+      - wget
+      - bzip2
+      - vim
+      - which
+      - tree
+      - java-1.8.0-openjdk.x86_64
+      - perl-CPAN
+      - libX11-devel
+    when: ansible_os_family == "RedHat"
+  # See, now this just makes me upset. I have to put in this dirty workaround because
+  # there is a circular dependency on a frikkin perl module
+  # (need cpanm for Test::more, which needs cpanm to install)
+  - block:
+      - name: Ensure that cpanm is available
+        uri:
+          url: https://cpanmin.us/
+          dest: /bin/cpanm
+          creates: /bin/cpanm
+      - name: Ensure executable
+        file:
+          path: /bin/cpanm
+          mode: "u+rwx"
+    rescue:
+      - debug:
+          msg: "Ah, fuckit"
+
+    when: ansible_os_family == "RedHat"
+
+  - name: Install Required Groups (RedHat)
+    yum:
+      name: "{{ item }}"
+      state: present
+    when: ansible_os_family == 'RedHat'
+    with_items:
+      - '@X Software Development'
+      - '@Development tool'
+
+  - name: Install prerequisites (Debian)
+    package:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - build-essential
+      - gfortran
+      - git
+      - environment-modules
+      - wget
+      - bzip2
+      - vim
+      - default-jdk
+      - tree
+      - curl
+      - m4
+      - cpanminus
+      - libx11-dev
+      - zip
+    when: "{{ ansible_os_family == 'Debian'}}"
+
+  - name: Ensure Testing packages are installed
+    cpanm:
+      name: Test::More
+
+  # - name: Push the modules (RedHat)
+  #   copy:
+  #     src: "files/usr/share/Modules/modulefiles/{{ item }}"
+  #     dest: "/usr/share/Modules/modulefiles/{{ item }}"
+  #   with_items:
+  #     - ci
+  #     - deploy
+  #   when: ansible_os_family == "RedHat"
+
+  - name: Pull in vars
+    include_vars:
+      file: code-rade.yml
+      name: code_rade
+
+  - name: Template modules
+    template:
+      src: "templates/{{ item.path[ansible_os_family] }}/{{item.name }}.j2"
+      dest: "/{{ item.path[ansible_os_family] }}/{{item.name}}"
+    with_items: "{{code_rade.modules}}"
+
+  # - name: Push the modules (Debian)
+  #   copy:
+  #     src: "files/usr/share/Modules/modulefiles/{{ item }}"
+  #     dest: "/usr/share/modules/modulefiles/{{ item }}"
+  #   with_items:
+  #     - ci
+  #     - deploy
+  #   when: ansible_os_family == "Debian"

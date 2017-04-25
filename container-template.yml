@@ -1,0 +1,52 @@
+version: '2'
+services:
+{% for slave in slaves %}
+  build-slave-{{ slave.name }}:
+    image: "{{ slave.base_image}}:{{ slave.base_image_tag }}"
+    ports:
+        - "{{ slave.host_port }}:{{ container_port }}"
+    command: ["/usr/sbin/sshd”, "-D”,”-p {{ container_port}}"]
+    #command: ["/bin/sh”,”-c”,“while true; do sleep 1000; done”]
+    volumes_from:
+      - CODE-RADE-src:rw
+      - CODE-RADE-modules:rw
+      - CODE-RADE-soft:rw
+      - CODE-RADE-repo:rw
+      - CODE-RADE-cvmfs:rw
+{% endfor %}
+
+
+  CODE-RADE-src:
+    image: alpine
+    command: ["/bin/sh”,”-c”,“while true; do sleep 1000; done”]
+    volumes:
+      - "{{ src_dir }}"
+  CODE-RADE-soft:
+    image: alpine
+    command: ["/bin/sh”,”-c”,“while true; do sleep 1000; done”]
+    volumes:
+      - "{{ soft_dir }}"
+  CODE-RADE-repo:
+    image: alpine
+    command: ["/bin/sh”,”-c”,“while true; do sleep 1000; done”]
+    volumes:
+      - "{{ repo_dir }}"
+  CODE-RADE-modules:
+    image: alpine
+    command: ["/bin/sh”,”-c”,“while true; do sleep 1000; done”]
+    volumes:
+      - "{{ modules_dir }}"
+  CODE-RADE-cvmfs:
+    image: alpine
+    command: ["/bin/sh”,”-c”,“while true; do sleep 1000; done”]
+    volumes:
+      - "{{ cvmfs_dir }}"
+
+
+registries:
+  docker:
+    url: https://hub.docker.com
+    namespace: /u/aaroc
+  quay:
+    url: https://quay.io
+    namespace: aaroc

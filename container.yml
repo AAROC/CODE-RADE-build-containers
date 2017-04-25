@@ -1,0 +1,111 @@
+version: "2"
+settings:
+  conductor_base: centos:7
+services:
+  build-slave-centos6:
+    from: "centos:6"
+    roles:
+      - CODE-RADE-container
+    ports:
+        - "5000:5200"
+    command: ["/usr/sbian/sshd", "-D","-p","5200"]
+    volumes_from:
+      - CODE-RADE-src:rw
+      - CODE-RADE-modules:rw
+      - CODE-RADE-soft:rw
+      - CODE-RADE-repo:rw
+      - CODE-RADE-cvmfs:rw
+  build-slave-centos7:
+    from: "centos:7"
+    roles:
+      - CODE-RADE-container
+    ports:
+        - "5001:5200"
+    command: ["/usr/sbin/sshd", "-D","-p","5200"]
+    volumes_from:
+      - CODE-RADE-src:rw
+      - CODE-RADE-modules:rw
+      - CODE-RADE-soft:rw
+      - CODE-RADE-repo:rw
+      - CODE-RADE-cvmfs:rw
+  build-slave-ubuntu1404:
+    from: "ubuntu:14.04"
+    roles:
+      - CODE-RADE-container
+    ports:
+        - "5002:5200"
+    command: ["/usr/sbin/sshd", "-D","-p","5200"]
+    volumes_from:
+      - CODE-RADE-src:rw
+      - CODE-RADE-modules:rw
+      - CODE-RADE-soft:rw
+      - CODE-RADE-repo:rw
+      - CODE-RADE-cvmfs:rw
+  build-slave-ubuntu1610:
+    from: "ubuntu:16.10"
+    roles:
+      - CODE-RADE-container
+    ports:
+        - "5003:5200"
+    command: ["/usr/sbin/sshd", "-D","-p","5200"]
+    volumes_from:
+      - CODE-RADE-src:rw
+      - CODE-RADE-modules:rw
+      - CODE-RADE-soft:rw
+      - CODE-RADE-repo:rw
+      - CODE-RADE-cvmfs:rw
+
+  CODE-RADE-src:
+    from: alpine
+    command: ["/bin/sh","-c",“while true; do sleep 1000; done"]
+    volumes:
+      - /data/src
+  CODE-RADE-soft:
+    from: alpine
+    command: ["/bin/sh","-c",“while true; do sleep 1000; done"]
+    volumes:
+      - /data/ci-build
+  CODE-RADE-repo:
+    from: alpine
+    command: ["/bin/sh","-c",“while true; do sleep 1000; done"]
+    volumes:
+      - /data/artefacts
+  CODE-RADE-modules:
+    from: alpine
+    command: ["/bin/sh","-c",“while true; do sleep 1000; done"]
+    volumes:
+      - /data/modules
+  CODE-RADE-cvmfs:
+    from: alpine
+    command: ["/bin/sh","-c",“while true; do sleep 1000; done"]
+    volumes:
+      - /cvmfs
+
+
+registries:
+  docker:
+    url: https://hub.docker.com
+    namespace: /u/aaroc
+  quay:
+    url: https://quay.io
+    namespace: aaroc
+
+  # Add your containers here, specifying the base image you want to build from
+  # For example:
+  #
+  # web:
+  #   from: centos:7
+  #   roles:
+  #     - apache-container
+  #   ports:
+  #     - "80:80"
+  #   command: ['/usr/bin/dumb-init', '/usr/sbin/apache2ctl', '-D', 'FOREGROUND']
+  #   dev_overrides:
+  #     environment:
+  #       - "DEBUG=1"
+  #
+registries: {}
+  # Add optional registries used for deployment. For example:
+  #  google:
+  #    url: https://gcr.io
+  #    namespace: my-cool-project-xxxxxx

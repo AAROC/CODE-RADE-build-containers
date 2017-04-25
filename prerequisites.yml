@@ -1,0 +1,5 @@
+---
+prerequisites:
+  - git
+  - bash
+  - curl
