@@ -1,5 +1,4 @@
-[![Build Container Repository on Quay](https://quay.io/repository/aaroc/code-rade-build-containers-build-slave/status "Docker Repository on Quay")](https://quay.io/repository/aaroc/code-rade-build-containers-build-slave) [![Data Container Repository on Quay](https://quay.io/repository/aaroc/code-rade-data/status "Docker Repository on Quay")](https://quay.io/repository/aaroc/code-rade-data) [![Build Status](https://ci.sagrid.ac.za/job/build-container/badge/icon)](https://ci.sagrid.ac.za/job/build-container)  [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Build Status](https://travis-ci.org/AAROC/CODE-RADE-build-containers.svg?branch=master)](https://travis-ci.org/AAROC/CODE-RADE-build-containers)
 # CODE-RADE build containers
 
 This repository contains the Ansible-Container code for building the CODE-RADE build slave containers
