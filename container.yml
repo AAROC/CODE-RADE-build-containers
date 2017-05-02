@@ -1,8 +1,9 @@
+---
 version: "2"
 settings:
   conductor_base: centos:7
 services:
-  build-slave-centos6:
+  centos6:
     from: "centos:6"
     roles:
       - CODE-RADE-container
@@ -15,7 +16,7 @@ services:
       - code-rade-soft:rw
       - code-rade-repo:rw
       - code-rade-cvmfs:rw
-  build-slave-centos7:
+  centos7:
     from: "centos:7"
     roles:
       - CODE-RADE-container
@@ -28,7 +29,7 @@ services:
       - code-rade-soft:rw
       - code-rade-repo:rw
       - code-rade-cvmfs:rw
-  build-slave-ubuntu1404:
+  ubuntu1404:
     from: "ubuntu:14.04"
     roles:
       - CODE-RADE-container
@@ -41,45 +42,62 @@ services:
       - code-rade-soft:rw
       - code-rade-repo:rw
       - code-rade-cvmfs:rw
-  build-slave-ubuntu1610:
-    from: "ubuntu:16.10"
-    roles:
-      - CODE-RADE-container
-    ports:
-        - "5003:5200"
-    command: ["/usr/sbin/sshd", "-D","-p","5200"]
-    volumes_from:
-      - code-rade-src:rw
-      - code-rade-modules:rw
-      - code-rade-soft:rw
-      - code-rade-repo:rw
-      - code-rade-cvmfs:rw
+  # build-slave-ubuntu1610:
+  #   from: "ubuntu:16.10"
+  #   roles:
+  #     - CODE-RADE-container
+  #   ports:
+  #       - "5003:5200"
+  #   command: ["/usr/sbin/sshd", "-D","-p","5200"]
+  #   volumes_from:
+  #     - code-rade-src:rw
+  #     - code-rade-modules:rw
+  #     - code-rade-soft:rw
+  #     - code-rade-repo:rw
+  #     - code-rade-cvmfs:rw
 
+  # code-rade-src:
+  #   from: alpine
+  #   command: ["/bin/sh","-c","while true; do sleep 1000; done"]
+  #   volumes:
+  #     - /data/src
+  # code-rade-soft:
+  #   from: alpine
+  #   command: ["/bin/sh","-c","while true; do sleep 1000; done"]
+  #   volumes:
+  #     - /data/ci-build
+  # code-rade-repo:
+  #   from: alpine
+  #   command: ["/bin/sh","-c","while true; do sleep 1000; done"]
+  #   volumes:
+  #     - /data/artefacts
+  # code-rade-modules:
+  #   from: alpine
+  #   command: ["/bin/sh","-c","while true; do sleep 1000; done"]
+  #   volumes:
+  #     - /data/modules
+  # code-rade-cvmfs:
+  #   from: alpine
+  #   command: ["/bin/sh","-c","while true; do sleep 1000; done"]
+  #   volumes:
+  #     - /cvmfs
+
+volumes:
   code-rade-src:
-    from: alpine
-    command: ["/bin/sh","-c","while true; do sleep 1000; done"]
-    volumes:
-      - /data/src
+   docker:
+    - /data/src
   code-rade-soft:
-    from: alpine
-    command: ["/bin/sh","-c","while true; do sleep 1000; done"]
-    volumes:
-      - /data/ci-build
+    docker:
+    - /data/ci-build
   code-rade-repo:
-    from: alpine
-    command: ["/bin/sh","-c","while true; do sleep 1000; done"]
-    volumes:
-      - /data/artefacts
+    docker:
+    - /data/artefacts
   code-rade-modules:
-    from: alpine
-    command: ["/bin/sh","-c","while true; do sleep 1000; done"]
-    volumes:
-      - /data/modules
+    docker:
+    - /data/modules
   code-rade-cvmfs:
-    from: alpine
-    command: ["/bin/sh","-c","while true; do sleep 1000; done"]
-    volumes:
-      - /cvmfs
+    docker:
+    - /cvmfs
 
 registries:
   docker:
