@@ -11,7 +11,7 @@ script:
 - mkdir container
 - cd container
 - ansible-container init AAROC.CODE-RADE-build-containers
-- ansible-container --use-local-python  build
+- ansible-container build --use-local-python
 notifications:
   slack:
     secure: QCCWCP6qIE8Zb8gyFuyWChN7hhTLe5AyZN84ZEhpwIr0KIeYle2GgY9bLkn1l/9dO5wB9X+XSILXuN873mr+9ZYVaZ3fabnsPIdBEhBBOxUIGCKhqPnlaGaD5EH9D2id9iSgMOieszh0cwALImYLdjlj+5soLkpflE6UedwgmprxRegxxnurcsRHI7JZgW2KuZWWspCF09CBj/AMKbqeectlKy5+3Ii5N/GuQF34d/nXVUEuqCjCDBU0YHX44mIj2JPa2oO3zuG+MmVHQ0430H/BYwLFlWM8IIEWIRlMfk312w/PKgDTwfwI595f/XB9Y6AATvHm8lPhjnp/jtLx83nv5fz80EXfLa4q4C92FQ6vDuHU6C0Eo7GtP4nKqEvSrK9IIRLpYhGU22LbXp2iKds22PI4V5aYojiSKOMSl9QHN0rNR7jJNJS4hFKF+BNpLujm8gjlWs+e084dGyTyP26rMD7wmSeJHHtOD2aB4O8TEwcvgzuMBhKJahYcpYAfJOYhHDCSS+jaUTcq5u/C2bOZR7wFYv3exMpg7T0k1OgONEX2NLbHXKygqn7Mgt62Kp49Y0aH0tdYcvwyc/nKAdXEBv3ZZcL99PU0a9brAKuhhoceHv+rwyJe19pKHBRMZ4RUK7Bejz6tVoX7gpM731W7JssVuIh6wJ8Jd9tl1l0=
