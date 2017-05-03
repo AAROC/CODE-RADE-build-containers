@@ -22,7 +22,6 @@ script:
 - mkdir container
 - cd container
 - ansible-container init AAROC.CODE-RADE-build-containers
-- ansible-container install AAROC.CODE-RADE-container
 - ansible-container --project-name code-rade build --roles-path /home/becker/Ops/AAROC/DevOps/Ansible/roles/ --use-local-python
 notifications:
   slack:
