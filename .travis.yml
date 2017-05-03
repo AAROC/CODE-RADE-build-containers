@@ -18,6 +18,7 @@ before_script:
 - docker pull quay.io/aaroc/ansible-ready-centos6
 - docker pull quay.io/aaroc/ansible-ready-centos7
 script:
+- cd $HOME
 - mkdir container
 - cd container
 - ansible-container init AAROC.CODE-RADE-build-containers
