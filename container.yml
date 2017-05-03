@@ -6,7 +6,7 @@ services:
   centos6:
     from: "quay.io/aaroc/ansible-ready-centos6"
     roles:
-      - CODE-RADE-container
+      - AAROC.CODE-RADE-container
     ports:
         - "5000:5200"
     command: ["/usr/sbin/sshd", "-D","-p","5200"]
@@ -19,7 +19,7 @@ services:
   centos7:
     from: "quay.io/aaroc/ansible-ready-centos7"
     roles:
-      - CODE-RADE-container
+      - AAROC.CODE-RADE-container
     ports:
         - "5001:5200"
     command: ["/usr/sbin/sshd", "-D","-p","5200"]
@@ -32,7 +32,7 @@ services:
   ubuntu1404:
     from: "quay.io/aaroc/ansible-ready-ubuntu14.04"
     roles:
-      - CODE-RADE-container
+      - AAROC.CODE-RADE-container
     ports:
         - "5002:5200"
     command: ["/usr/sbin/sshd", "-D","-p","5200"]
@@ -45,7 +45,7 @@ services:
   ubuntu1610:
     from: "quay.io/aaroc/ansible-ready-ubuntu16.10"
     roles:
-      - CODE-RADE-container
+      - AAROC.CODE-RADE-container
     ports:
         - "5003:5200"
     command: ["/usr/sbin/sshd", "-D","-p","5200"]
