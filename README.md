@@ -34,7 +34,7 @@ Note that if you do this, the container will be empty (we  still  need to add a 
 To build the container for differing base operating systems, use the `varsXXX.yml` files provided (or add your own), _e.g._ :
 
 ```
-ansible-container --var-file vars-centos.yml build
+ansible-container --project-name code-rade build --roles-path /home/becker/Ops/AAROC/DevOps/Ansible/roles/ --use-local-python
 ```
 
 ## Pushing to the image registry
@@ -42,12 +42,13 @@ ansible-container --var-file vars-centos.yml build
 `container.yml` contains the specification of which registries are used. We use quay by default. In order to push the built image to a registry, so as to make it usable by another build site, do
 
 ```
-ansible-container --var-file vars.yml push --push-to quay
+ansible-container --project-name code-rade push --roles-path /home/becker/Ops/AAROC
+/DevOps/Ansible/roles/ --push-to quay --tag latest
 ```
 
-Obviously, vary the vars file accordingly.
+## ~~Tagging images with OS name~~
 
-## Tagging images with OS name
+(obsolete with Ansible-Container 0.9.x)
 
 Ansible-Container does not yet allow for you to tag images with your specified tags (See [this request](https://github.com/ansible/ansible-container/issues/125)), so if you want to build with name-tagged images (instead of time-tagged images), you need to use the docker CLI to add the tags you want:
 
