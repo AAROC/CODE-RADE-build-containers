@@ -5,6 +5,7 @@ settings:
 services:
   centos6:
     from: "quay.io/aaroc/ansible-ready-centos6"
+    privileged: true
     roles:
       - AAROC.CODE-RADE-container
     ports:
@@ -18,6 +19,7 @@ services:
       - code-rade-cvmfs:rw
   centos7:
     from: "quay.io/aaroc/ansible-ready-centos7"
+    privileged: true
     roles:
       - AAROC.CODE-RADE-container
     ports:
@@ -31,6 +33,7 @@ services:
       - code-rade-cvmfs:rw
   ubuntu1404:
     from: "quay.io/aaroc/ansible-ready-ubuntu14.04"
+    privileged: true
     roles:
       - AAROC.CODE-RADE-container
     ports:
@@ -44,6 +47,7 @@ services:
       - code-rade-cvmfs:rw
   ubuntu1610:
     from: "quay.io/aaroc/ansible-ready-ubuntu16.10"
+    privileged: true
     roles:
       - AAROC.CODE-RADE-container
     ports:
