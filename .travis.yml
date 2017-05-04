@@ -6,7 +6,7 @@ services:
 before_install:
 - pip install --upgrade setuptools
 install:
-- ansible-galaxy install AAROC.CODE-RADE-container
+- git clone https://github.com/AAROC/CODE-RADE-build-container /etc/ansible/roles
 - git clone https://github.com/ansible/ansible-container
 - cd ansible-container
 - git checkout develop
