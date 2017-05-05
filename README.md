@@ -1,9 +1,23 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Build Status](https://travis-ci.org/AAROC/CODE-RADE-build-containers.svg?branch=master)](https://travis-ci.org/AAROC/CODE-RADE-build-containers)
+
 # CODE-RADE build containers
 
 This repository contains the Ansible-Container code for building the CODE-RADE build slave containers
 
-The containers are built with [Ansible Container](http://docs.ansible.com/ansible-container) and stored on [quay.io](https://quay.io).
+The containers are built with [Ansible Container](http://docs.ansible.com/ansible-container) and stored on [quay.io](https://quay.io). We build  the following base images :
+
+| Image | Status |
+| :---------:| :---------:|
+| CentOS 6 |  [![Docker Repository on Quay](https://quay.io/repository/aaroc/code-rade-centos6/status "Docker Repository on Quay")](https://quay.io/repository/aaroc/code-rade-centos6) |
+| Ubuntu 14.04 | [![Docker Repository on Quay](https://quay.io/repository/aaroc/code-rade-ubuntu1404/status "Docker Repository on Quay")](https://quay.io/repository/aaroc/code-rade-ubuntu1404) |
+| CentOS 7 | [![Docker Repository on Quay](https://quay.io/repository/aaroc/code-rade-centos7/status "Docker Repository on Quay")](https://quay.io/repository/aaroc/code-rade-centos7) |
+| Ubuntu 16.10 | [![Docker Repository on Quay](https://quay.io/repository/aaroc/code-rade-ubuntu1610/status "Docker Repository on Quay")](https://quay.io/repository/aaroc/code-rade-ubuntu1610) |
+
+The containers can be used by pulling them from quay.io _e.g._ :
+
+```
+docker pull quay.io/aaroc/code-rade-ubuntu1610
+```
 
 The container adds a user, jdk and ssh daemon for jenkins, as well as some CODE-RADE secret sauce :
 
@@ -16,22 +30,16 @@ The container adds a user, jdk and ssh daemon for jenkins, as well as some CODE-
       `setenv        SRC_DIR                /data/src/$::env(NAME)/$::env(VERSION)`
     * `$MODULES` : The path to the modulefiles for the CI environment
       `set           MODULES                /data/modules`
+  * The `deploy` modulefile which sets the same variables except the root of `$SOFT_DIR` is under `/cvmfs`
   * A data container (`CODE-RADE-data`) is used to persist the data from build to build, and to make the builds portable.
 
-## The Data Container
+## The Data Containers
 
-We use the [data container pattern](https://docs.docker.com/engine/tutorials/dockervolumes/#/data-volumes) to provide persistence to the build artefacts, across jobs. This can be created by hand or pulled from Quay :
-
-  1. `docker create -v /data  --name CODE-RADE-data alpine /bin/true`
-  1. `docker pull quay.io/aaroc/code-rade-data`
-
-Note that if you do this, the container will be empty (we  still  need to add a pots-process of pushing the updated container to Quay)
+We use the [data container pattern](https://docs.docker.com/engine/tutorials/dockervolumes/#/data-volumes) to provide persistence to the build artefacts, across jobs.  These are expressed in the `container.yml` for Docker only.
 
 ## To build
 
-`ansible-container --var-file vars.yml build`
-
-To build the container for differing base operating systems, use the `varsXXX.yml` files provided (or add your own), _e.g._ :
+In order to build the containers, you can simply do :
 
 ```
 ansible-container --project-name code-rade build --roles-path /home/becker/Ops/AAROC/DevOps/Ansible/roles/ --use-local-python
@@ -45,6 +53,7 @@ ansible-container --project-name code-rade build --roles-path /home/becker/Ops/A
 ansible-container --project-name code-rade push --roles-path /home/becker/Ops/AAROC
 /DevOps/Ansible/roles/ --push-to quay --tag latest
 ```
+
 
 ## ~~Tagging images with OS name~~
 
