@@ -6,7 +6,7 @@ services:
 before_install:
 - pip install --upgrade setuptools
 install:
-- sudo git clone https://github.com/AAROC/CODE-RADE-build-container /etc/ansible/roles
+- sudo git clone https://github.com/AAROC/CODE-RADE-container /etc/ansible/roles
 - git clone https://github.com/ansible/ansible-container
 - cd ansible-container
 - git checkout develop
