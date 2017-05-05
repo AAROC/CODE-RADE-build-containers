@@ -2,7 +2,10 @@
 
 # CODE-RADE build containers
 
-This repository contains the Ansible-Container code for building the CODE-RADE build slave containers
+## Roles used
+This repository contains the Ansible-Container code for building the CODE-RADE build slave containers. It uses the [`AAROC.CODE-RADE-container` role from Ansible Galaxy](https://galaxy.ansible.com/AAROC/CODE-RADE-container)
+
+## Containers
 
 The containers are built with [Ansible Container](http://docs.ansible.com/ansible-container) and stored on [quay.io](https://quay.io). We build  the following base images :
 
@@ -54,21 +57,22 @@ ansible-container --project-name code-rade push --roles-path /home/becker/Ops/AA
 /DevOps/Ansible/roles/ --push-to quay --tag latest
 ```
 
+## Running
 
-## ~~Tagging images with OS name~~
+These containers are designed to be provisioned automatically by a CI system. The default entrypoint is ssh on port 5200.
 
-(obsolete with Ansible-Container 0.9.x)
+You can use them to check builds locally. In order to run them, do
 
-Ansible-Container does not yet allow for you to tag images with your specified tags (See [this request](https://github.com/ansible/ansible-container/issues/125)), so if you want to build with name-tagged images (instead of time-tagged images), you need to use the docker CLI to add the tags you want:
+```
+ansible-container ansible-container --project-name code-rade run --roles-path /home/becker/Ops/AAROC/DevOps/Ansible/roles/
+```
 
-  1. Build with a specified set of vars : `ansible-container --var-file vars-ubuntu1404.yml build`
-  1. Check the name of the created image, from the SHA reported by ansible-container :
+Then ssh into the running container :
 
-          Committing image...
-          Exported code-rade-build-containers-build-slave with image ID sha256:fd0ce1c13f8c583f8f90d265d662b8da40eabf731be3c046242df6970c2ef5fe
-          docker images | grep fd0ce1c13f8c
-          code-rade-build-containers-build-slave                 20161219105249      fd0ce1c13f8c About a minute ago   1.179 GB
-          code-rade-build-containers-build-slave                 latest                           fd0ce1c13f8c About a minute ago   1.179 GB
+```
+ssh jenkins@172.17.0.2 -p 5200
+```
 
-  1. The tag you want is the date tag : `20161219105249` (or `latest`, if you haven't done another build). Tag this with an OS-name : `docker tag code-rade-build-containers-build-slave:20161219105249 quay.io/aaroc/code-rade-build-containers-build-slave:ubuntu1404`
-  1. Push the image to quay : `docker push quay.io/aaroc/code-rade-build-containers-build-slave:ubuntu1404`
+# Deploy
+
+As mentioned before, these containers are for provisioning from CI environments. If you really want to run a static build cluster, you can use the `--deploy` command of Ansible Container. See https://docs.ansible.com/ansible-container/reference/deploy.html for deployment options
