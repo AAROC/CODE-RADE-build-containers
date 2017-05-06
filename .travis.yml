@@ -10,6 +10,7 @@ before_install:
 - docker create -v /data/modules --name code-rade-modules alpine /bin/true
 - docker create -v /data/artefacts --name code-rade-repo alpine /bin/true
 - docker create -v /data/ci-build --name code-rade-soft alpine /bin/true
+- docker create -v /data/src --name code-rade-src alpine /bin/true
 install:
 - mkdir $HOME/roles
 - sudo git clone https://github.com/AAROC/CODE-RADE-container $HOME/roles/AAROC.CODE-RADE-container
