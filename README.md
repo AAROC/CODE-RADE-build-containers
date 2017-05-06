@@ -1,4 +1,5 @@
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Build Status](https://travis-ci.org/AAROC/CODE-RADE-build-containers.svg?branch=master)](https://travis-ci.org/AAROC/CODE-RADE-build-containers)
+[![DOI](https://zenodo.org/badge/73183766.svg)](https://zenodo.org/badge/latestdoi/73183766)
+ [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Build Status](https://travis-ci.org/AAROC/CODE-RADE-build-containers.svg?branch=master)](https://travis-ci.org/AAROC/CODE-RADE-build-containers)
 
 # CODE-RADE build containers
 
@@ -76,3 +77,8 @@ ssh jenkins@172.17.0.2 -p 5200
 # Deploy
 
 As mentioned before, these containers are for provisioning from CI environments. If you really want to run a static build cluster, you can use the `--deploy` command of Ansible Container. See https://docs.ansible.com/ansible-container/reference/deploy.html for deployment options
+
+# Citing
+
+If you produce research or other output and these containers are a part of that workflow, please cite as  
+Bruce Becker. (2017). AAROC/CODE-RADE-build-containers: CODE-RADE Foundation Release 3 - Build Containers [Data set]. Zenodo. http://doi.org/10.5281/zenodo.572275
