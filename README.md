@@ -65,7 +65,7 @@ These containers are designed to be provisioned automatically by a CI system. Th
 You can use them to check builds locally. In order to run them, do
 
 ```
-ansible-container ansible-container --project-name code-rade run --roles-path /home/becker/Ops/AAROC/DevOps/Ansible/roles/
+ansible-container --project-name code-rade run --roles-path /home/becker/Ops/AAROC/DevOps/Ansible/roles/
 ```
 
 Then ssh into the running container :
