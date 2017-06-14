@@ -19,7 +19,7 @@ install:
 - git checkout develop
 - virtualenv code-rade
 - source code-rade/bin/activate
-- pip install -e .[docker]
+- pip install -e ansible-container[docker]
 before_script:
 - docker pull quay.io/aaroc/ansible-ready-ubuntu14.04
 - docker pull quay.io/aaroc/ansible-ready-ubuntu16.10
