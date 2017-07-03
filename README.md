@@ -54,8 +54,7 @@ ansible-container --project-name code-rade build --roles-path /home/becker/Ops/A
 `container.yml` contains the specification of which registries are used. We use quay by default. In order to push the built image to a registry, so as to make it usable by another build site, do
 
 ```
-ansible-container --project-name code-rade push --roles-path /home/becker/Ops/AAROC
-/DevOps/Ansible/roles/ --push-to quay --tag latest
+ansible-container --project-name code-rade push --roles-path /home/becker/Ops/AAROC/DevOps/Ansible/roles/ --push-to quay --tag latest
 ```
 
 ## Running
