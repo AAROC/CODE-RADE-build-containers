@@ -1,1 +1,2 @@
-main.retry
+*.retry
+backup
