@@ -14,12 +14,12 @@ before_install:
 install:
 - mkdir $HOME/roles
 - sudo git clone https://github.com/AAROC/CODE-RADE-container $HOME/roles/AAROC.CODE-RADE-container
-- git clone https://github.com/ansible/ansible-container
-- cd ansible-container
-- git checkout develop
-- virtualenv code-rade
-- source code-rade/bin/activate
-- pip install -e .[docker]
+# - git clone https://github.com/ansible/ansible-container
+# - cd ansible-container
+# - git checkout develop
+# - virtualenv code-rade
+# - source code-rade/bin/activate
+- pip install ansible-container[docker]
 before_script:
 - docker pull quay.io/aaroc/ansible-ready-ubuntu14.04
 - docker pull quay.io/aaroc/ansible-ready-ubuntu16.10

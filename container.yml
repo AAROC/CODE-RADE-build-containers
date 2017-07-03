@@ -15,7 +15,6 @@ services:
       - code-rade-src:rw
       - code-rade-modules:rw
       - code-rade-soft:rw
-      - code-rade-repo:rw
       - code-rade-cvmfs:rw
   centos7:
     from: "quay.io/aaroc/ansible-ready-centos7"
