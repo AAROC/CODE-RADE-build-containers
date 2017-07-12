@@ -2,6 +2,7 @@
 version: "2"
 settings:
   conductor_base: centos:7
+  project-name: code-rade
 services:
   centos6:
     from: "quay.io/aaroc/ansible-ready-centos6"
