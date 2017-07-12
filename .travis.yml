@@ -3,6 +3,7 @@ python: '2.7'
 sudo: required
 services:
 - docker
+dist: trusty
 before_install:
 - pip install --upgrade setuptools
 - docker pull alpine
