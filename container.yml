@@ -15,7 +15,7 @@ services:
     volumes_from:
       - code-rade-src:rw
       - code-rade-modules:rw
-      - code-rade-soft:rw
+      - ansible_CODE-RADE-soft_1:rw
       - code-rade-cvmfs:rw
   centos7:
     from: "quay.io/aaroc/ansible-ready-centos7"
@@ -26,9 +26,9 @@ services:
         - "5001:5200"
     command: ["/usr/sbin/sshd", "-D","-p","5200"]
     volumes_from:
-      - code-rade-src:rw
+      - ansible_CODE-RADE-src_1:rw
       - code-rade-modules:rw
-      - code-rade-soft:rw
+      - ansible_CODE-RADE-soft_1:rw
       - code-rade-repo:rw
       - code-rade-cvmfs:rw
   ubuntu1404:
@@ -40,9 +40,9 @@ services:
         - "5002:5200"
     command: ["/usr/sbin/sshd", "-D","-p","5200"]
     volumes_from:
-      - code-rade-src:rw
+      - ansible_CODE-RADE-src_1:rw
       - code-rade-modules:rw
-      - code-rade-soft:rw
+      - ansible_CODE-RADE-soft_1:rw
       - code-rade-repo:rw
       - code-rade-cvmfs:rw
   ubuntu1610:
@@ -54,9 +54,9 @@ services:
         - "5003:5200"
     command: ["/usr/sbin/sshd", "-D","-p","5200"]
     volumes_from:
-      - code-rade-src:rw
+      - ansible_CODE-RADE-src_1:rw
       - code-rade-modules:rw
-      - code-rade-soft:rw
+      - ansible_CODE-RADE-soft_1:rw
       - code-rade-repo:rw
       - code-rade-cvmfs:rw
 
@@ -87,10 +87,10 @@ services:
   #     - /cvmfs
 
 volumes:
-  code-rade-src:
+  ansible_CODE-RADE-src_1:
    docker:
     - /data/src
-  code-rade-soft:
+  ansible_CODE-RADE-soft_1:
     docker:
     - /data/ci-build
   code-rade-repo:
