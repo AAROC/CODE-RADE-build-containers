@@ -13,10 +13,10 @@ services:
         - "5000:5200"
     command: ["/usr/sbin/sshd", "-D","-p","5200"]
     volumes_from:
-      - ansible_CODE-RADE-src_1:rw
-      - code-rade-modules:rw
+      - ansible_CODE-RADE-src_1_1:rw
+      - ansible_CODE-RADE-modules_1:rw
       - ansible_CODE-RADE-soft_1:rw
-      - code-rade-cvmfs:rw
+      - ansible_CODE-RADE-cvmfs_1:rw
   centos7:
     from: "quay.io/aaroc/ansible-ready-centos7"
     privileged: true
@@ -26,11 +26,11 @@ services:
         - "5001:5200"
     command: ["/usr/sbin/sshd", "-D","-p","5200"]
     volumes_from:
-      - ansible_CODE-RADE-src_1:rw
-      - code-rade-modules:rw
+      - ansible_CODE-RADE-src_1_1:rw
+      - ansible_CODE-RADE-modules_1:rw
       - ansible_CODE-RADE-soft_1:rw
-      - code-rade-repo:rw
-      - code-rade-cvmfs:rw
+      - ansible_CODE-RADE-repo_1:rw
+      - ansible_CODE-RADE-cvmfs_1:rw
   ubuntu1404:
     from: "quay.io/aaroc/ansible-ready-ubuntu14.04"
     privileged: true
@@ -40,11 +40,11 @@ services:
         - "5002:5200"
     command: ["/usr/sbin/sshd", "-D","-p","5200"]
     volumes_from:
-      - ansible_CODE-RADE-src_1:rw
-      - code-rade-modules:rw
+      - ansible_CODE-RADE-src_1_1:rw
+      - ansible_CODE-RADE-modules_1:rw
       - ansible_CODE-RADE-soft_1:rw
-      - code-rade-repo:rw
-      - code-rade-cvmfs:rw
+      - ansible_CODE-RADE-repo_1:rw
+      - ansible_CODE-RADE-cvmfs_1:rw
   ubuntu1610:
     from: "quay.io/aaroc/ansible-ready-ubuntu16.10"
     privileged: true
@@ -54,13 +54,13 @@ services:
         - "5003:5200"
     command: ["/usr/sbin/sshd", "-D","-p","5200"]
     volumes_from:
-      - ansible_CODE-RADE-src_1:rw
-      - code-rade-modules:rw
+      - ansible_CODE-RADE-src_1_1:rw
+      - ansible_CODE-RADE-modules_1:rw
       - ansible_CODE-RADE-soft_1:rw
-      - code-rade-repo:rw
-      - code-rade-cvmfs:rw
+      - ansible_CODE-RADE-repo_1:rw
+      - ansible_CODE-RADE-cvmfs_1:rw
 
-  # code-rade-src:
+  # ansible_CODE-RADE-src_1:
   #   from: alpine
   #   command: ["/bin/sh","-c","while true; do sleep 1000; done"]
   #   volumes:
@@ -70,36 +70,36 @@ services:
   #   command: ["/bin/sh","-c","while true; do sleep 1000; done"]
   #   volumes:
   #     - /data/ci-build
-  # code-rade-repo:
+  # ansible_CODE-RADE-repo_1:
   #   from: alpine
   #   command: ["/bin/sh","-c","while true; do sleep 1000; done"]
   #   volumes:
   #     - /data/artefacts
-  # code-rade-modules:
+  # ansible_CODE-RADE-modules_1:
   #   from: alpine
   #   command: ["/bin/sh","-c","while true; do sleep 1000; done"]
   #   volumes:
   #     - /data/modules
-  # code-rade-cvmfs:
+  # ansible_CODE-RADE-cvmfs_1:
   #   from: alpine
   #   command: ["/bin/sh","-c","while true; do sleep 1000; done"]
   #   volumes:
   #     - /cvmfs
 
 volumes:
-  ansible_CODE-RADE-src_1:
+  ansible_CODE-RADE-src_1_1:
    docker:
     - /data/src
   ansible_CODE-RADE-soft_1:
     docker:
     - /data/ci-build
-  code-rade-repo:
+  ansible_CODE-RADE-repo_1:
     docker:
     - /data/artefacts
-  code-rade-modules:
+  ansible_CODE-RADE-modules_1:
     docker:
     - /data/modules
-  code-rade-cvmfs:
+  ansible_CODE-RADE-cvmfs_1:
     docker:
     - /cvmfs
 
