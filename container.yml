@@ -13,7 +13,7 @@ services:
         - "5000:5200"
     command: ["/usr/sbin/sshd", "-D","-p","5200"]
     volumes_from:
-      - ansible_CODE-RADE-src_1_1:rw
+      - ansible_CODE-RADE-src_1:rw
       - ansible_CODE-RADE-modules_1:rw
       - ansible_CODE-RADE-soft_1:rw
       - ansible_CODE-RADE-cvmfs_1:rw
@@ -26,7 +26,7 @@ services:
         - "5001:5200"
     command: ["/usr/sbin/sshd", "-D","-p","5200"]
     volumes_from:
-      - ansible_CODE-RADE-src_1_1:rw
+      - ansible_CODE-RADE-src_1:rw
       - ansible_CODE-RADE-modules_1:rw
       - ansible_CODE-RADE-soft_1:rw
       - ansible_CODE-RADE-repo_1:rw
@@ -40,7 +40,7 @@ services:
         - "5002:5200"
     command: ["/usr/sbin/sshd", "-D","-p","5200"]
     volumes_from:
-      - ansible_CODE-RADE-src_1_1:rw
+      - ansible_CODE-RADE-src_1:rw
       - ansible_CODE-RADE-modules_1:rw
       - ansible_CODE-RADE-soft_1:rw
       - ansible_CODE-RADE-repo_1:rw
@@ -54,7 +54,7 @@ services:
         - "5003:5200"
     command: ["/usr/sbin/sshd", "-D","-p","5200"]
     volumes_from:
-      - ansible_CODE-RADE-src_1_1:rw
+      - ansible_CODE-RADE-src_1:rw
       - ansible_CODE-RADE-modules_1:rw
       - ansible_CODE-RADE-soft_1:rw
       - ansible_CODE-RADE-repo_1:rw
@@ -87,7 +87,7 @@ services:
   #     - /cvmfs
 
 volumes:
-  ansible_CODE-RADE-src_1_1:
+  ansible_CODE-RADE-src_1:
    docker:
     - /data/src
   ansible_CODE-RADE-soft_1:
