@@ -7,11 +7,11 @@ dist: trusty
 before_install:
 - pip install --upgrade setuptools
 - docker pull alpine
-- docker create -v /cvmfs --name code-rade-cvmfs alpine /bin/true
-- docker create -v /data/modules --name code-rade-modules alpine /bin/true
-- docker create -v /data/artefacts --name code-rade-repo alpine /bin/true
-- docker create -v /data/ci-build --name code-rade-soft alpine /bin/true
-- docker create -v /data/src --name code-rade-src alpine /bin/true
+- docker create -v /cvmfs --name ansible_CODE-RADE-cvmfs_1 alpine /bin/true
+- docker create -v /data/modules --name ansible_CODE-RADE-modules_1 alpine /bin/true
+- docker create -v /data/artefacts --name ansible_CODE-RADE-repo_1 alpine /bin/true
+- docker create -v /data/ci-build --name ansible_CODE-RADE-soft_1 alpine /bin/true
+- docker create -v /data/src --name ansible_CODE-RADE-src_1 alpine /bin/true
 install:
 - mkdir $HOME/roles
 - sudo git clone https://github.com/AAROC/CODE-RADE-container $HOME/roles/AAROC.CODE-RADE-container
