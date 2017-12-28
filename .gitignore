@@ -1,2 +1,4 @@
 *.retry
 backup
+# ignore local deployment
+ansible-deployment
